@@ -24,3 +24,8 @@ setInterval(() => {
   imageElement.src = newImage;
   textElement.textContent = newText;
 }, 1000);
+
+window.onload = function() {
+  const audio = document.getElementById('audio');
+  audio.play();
+};
