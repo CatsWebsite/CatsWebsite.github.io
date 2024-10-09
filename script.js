@@ -10,22 +10,26 @@ function randomItem(array) {
 
 let lastUsed = { image: null, text: null };
 
+const startButton = document.getElementById('startButton');
+
+
 // ...
+function startSlideshow() {
+  setInterval(() => {
+    let newImage, newText;
+    do {
+      newImage = randomItem(images);
+      newText = randomItem(texts);
+    } while (newImage === lastUsed.image || newText === lastUsed.text);
+  
+    lastUsed.image = newImage;
+    lastUsed.text = newText;
+    imageElement.src = newImage;
+    textElement.textContent = newText;
+  }, 1000);
 
-setInterval(() => {
-  let newImage, newText;
-  do {
-    newImage = randomItem(images);
-    newText = randomItem(texts);
-  } while (newImage === lastUsed.image || newText === lastUsed.text);
-
-  lastUsed.image = newImage;
-  lastUsed.text = newText;
-  imageElement.src = newImage;
-  textElement.textContent = newText;
-}, 1000);
-
-window.onload = function() {
   const audio = document.getElementById('audio');
-  audio.play();
-};
+  audio.play()
+}
+
+startButton.addEventListener('click', startSlideshow);
