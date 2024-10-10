@@ -12,9 +12,21 @@ let lastUsed = { image: null, text: null };
 
 const startButton = document.getElementById('startButton');
 
+document.getElementById("container").style.display = "none";
 
 // ...
 function startSlideshow() {
+  let newImage, newText;
+  do {
+    newImage = randomItem(images);
+    newText = randomItem(texts);
+  } while (newImage === lastUsed.image || newText === lastUsed.text);
+
+  lastUsed.image = newImage;
+  lastUsed.text = newText;
+  imageElement.src = newImage;
+  textElement.textContent = newText;
+  
   setInterval(() => {
     let newImage, newText;
     do {
@@ -30,6 +42,8 @@ function startSlideshow() {
 
   const audio = document.getElementById('audio');
   audio.play()
+  document.getElementById("startButton").style.display = "none";
+  document.getElementById("container").style.display = "flex";
 }
 
 startButton.addEventListener('click', startSlideshow);
